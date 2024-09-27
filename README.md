@@ -1,5 +1,5 @@
 
-# Eric Xiang's repository for MiniData analysis#
+# Eric Xiang's repository for MiniData analysis
 
 This Minidata Analysis is part of the [STAT 545A](https://stat545.stat.ubc.ca/syllabus-545a/) course at the University of British Columbia. This goal of this analysis is to select a provided dataset and perform exploratory analysis on the data, including viewing the data, plotting the data, and coming up the research question 
 
