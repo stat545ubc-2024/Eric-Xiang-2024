@@ -131,6 +131,7 @@ Would you like to write more comments outside of the code chunk?
 
 ```{r}
 ### EXPLORE HERE ###
+#For each dataset, I am using head and glimpse to get an overall sense of the data, class and dimension to see the data structure and size. 
 #apt_buildings
 head(apt_buildings)
 class(apt_buildings)
@@ -174,7 +175,7 @@ Note it down below.
 
 <!-------------------------- Start your work below ---------------------------->
 
-Does the malignant patients have significantly higher radius mean than benign patients?
+Does the malignant patients have higher radius mean than benign patients?
 <!----------------------------------------------------------------------------->
 
 # Important note
@@ -234,9 +235,9 @@ ggplot(cancer_sample,aes(x=diagnosis,y=radius_mean ))+
 cancer_tibble<-cancer_sample%>%
   select(-ID)
 head(cancer_tibble)
-#8(graded) Create a distribution plot to confirm if higher mean radius is observed in the maaignant group than benign group. 
+#8(graded) Create a distribution plot to confirm if higher mean radius is observed in the malignant group than benign group. 
 ggplot(cancer_sample,aes(x=radius_mean,color=diagnosis))+
-  geom_density(alpha=0.8)+
+  geom_density(alpha=0.8)+ # to make the color more transparent for visbility 
   labs(x="mean_radius_nuclei",title="Density distribution of mean radius nuclei")+
   theme(plot.title = element_text(hjust=0.5))
 
@@ -247,7 +248,7 @@ ggplot(cancer_sample,aes(x=radius_mean,color=diagnosis))+
 <!-------------------------- Start your work below ---------------------------->
 
 I hypothesize that the larger radius mean of the biopsies will lead to a higher risk of cancer diagnosis.
-I first used histogram to visualize the distribution of the mean radius to get a sense the average of the biopsy radius in the dataset.
+I first used histogram to visualize the distribution of the mean radius to get a sense the average of the biopsy radius in the data set.
 I observed that most people have a radius at 15 (***exercise1***).
 
 I also utilized the box plot to assess radius mean in the benign and malignant population(***exericse 6***).
@@ -255,7 +256,7 @@ I also utilized the box plot to assess radius mean in the benign and malignant p
 I confirmed that malignant population has a higher mean radius, though there is some range overlapping between benign and malignant.
 A similar trend was also confirmed with the density distribution plot (*exercise8*).
 
-Ultimately,I created a subset table without a diagnosis, so I can perform my downstream analysis without releasing patient information (***exercise7***).
+lastly,I created a subset table without a diagnosis, so I can perform my downstream analysis without releasing patient information (***exercise7***).
 <!----------------------------------------------------------------------------->
 
 # Task 3: Choose research questions
@@ -267,10 +268,10 @@ Write the 4 questions and any additional comments below.
 
 <!--- *****START HERE***** --->
 
-1.  Is the radius mean of the biopsies correlate with the perimeter mean of the biopsies as expected?
-2.  Is the radius mean of the biopsies correlate with the compactness of the biopsies?
-3.  Is high radius mean of the biopsies going to lead to high largest radius in the biopsies?
-4.  Does the concavity provide additional prediction value ontop of the radius_mean for the breast cancer diagnosis? <!----------------------------->
+1.  Does the radius mean of the biopsies correlate with the perimeter mean of the biopsies?
+2.  Does the radius mean of the biopsies correlate with the compactness of the biopsies?
+3.  Does texture of the biopsies predict the diagnosis results?
+4.  Does the concavity provide an additional prediction value ontop of the radius_mean for the breast cancer diagnosis? <!----------------------------->
 
 # Overall reproducibility/Cleanliness/Coherence Checklist
 
