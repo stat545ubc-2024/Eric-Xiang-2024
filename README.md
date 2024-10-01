@@ -2,7 +2,7 @@
 
 This Minidata Analysis is part of the [STAT 545A](https://stat545.stat.ubc.ca/syllabus-545a/) course at the University of British Columbia. The goal of this analysis is to select a provided dataset and perform exploratory analysis on the data, including viewing the data, plotting the data, and coming up the research question
 
-**For Minidata Analysis 1 specifically,** I first chose the dataset I am interested and took a look of the heading,class, dimension, summary of the data and decided to go with cancer_sample data. I then performed an qualitative exploratory analysis to assess if biopsy radius mean is related to the cancer diagnosis result. I also came up my four questions that I would like to explore in the Milestone 2.
+**For Minidata Analysis 1 specifically,** I first chose the dataset I am interested and took a look of the heading,class, dimension, summary of the data and decided to go with *cancer_sample* data. I then performed a qualitative exploratory analysis to assess if biopsy radius mean is related to the cancer diagnosis result. I also came up my four questions that I would like to explore in the Milestone 2.
 
 **How to run this repository:**
 
@@ -14,6 +14,8 @@ This Minidata Analysis is part of the [STAT 545A](https://stat545.stat.ubc.ca/sy
 
 **Repository Structure** This repository contains the following key files and folders:
 
-README.md: This file provides an overview of the analysis
+1.  README.md: This file provides an overview of the analysis
 
-Mini_data_Analysis1 Deliverable-FINAL.Rmd: Data Analysis R code. Mini_data_Analysis1 Deliverable-FINAL.md: Markdown file from knitting the
+2.  Mini_data_Analysis1_Deliverable-FINAL.Rmd: Data Analysis R code.
+
+3.  Mini_data_Analysis1_Deliverable_Final_md: Knitted file of the mini data analysis1.
