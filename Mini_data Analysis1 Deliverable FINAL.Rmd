@@ -1,7 +1,7 @@
 ---
 title: 'Mini Data-Analysis Deliverable 1'
 author: 'Eric Xiang'
-date: '2024-09-26'
+date: '2024-09-30'
 output: github_document
 editor_options: 
   markdown: 
@@ -25,9 +25,9 @@ devtools::install_github("UBC-MDS/datateachr")
 2.  Load the packages below.
 
 ```{r}
-library(datateachr)
-library(tidyverse)
-library(ggplot2)
+library(datateachr)# dataset import 
+library(tidyverse)#data manipulation 
+library(ggplot2) #visualization
 ```
 
 3.  Make a repository in the <https://github.com/stat545ubc-2024> Organization. You can do this by following the steps found on canvas in the entry called [MDA: Create a repository](https://canvas.ubc.ca/courses/158528/pages/mda-create-a-repository). One completed, your repository should automatically be listed as part of the stat545ubc-2024 Organization.
@@ -131,29 +131,29 @@ Would you like to write more comments outside of the code chunk?
 
 ```{r}
 ### EXPLORE HERE ###
-#For each dataset, I am using head and glimpse to get an overall sense of the data, class and dimension to see the data structure and size. 
+#For each dataset, I am using head and summary to get an overall sense of the data, class and dimension to see the data structure and size. I prefer numeric data and data that is most completed. 
 #apt_buildings
 head(apt_buildings)
 class(apt_buildings)
 dim(apt_buildings)
-glimpse(apt_buildings)
+summary(apt_buildings)
 #cancer_samples
 head(cancer_sample)
 class(cancer_sample)
 dim(cancer_sample)
-glimpse(cancer_sample)
+summary(cancer_sample)
 
 #flow_sample
 head(flow_sample)
 class(flow_sample)
 dim(flow_sample)
-glimpse(flow_sample)
+summary(flow_sample)
 #parking_meters
 
 head(parking_meters)
 class(parking_meters)
 dim(parking_meters)
-glimpse(parking_meters)
+summary(parking_meters)
 
 ```
 
@@ -165,7 +165,9 @@ Briefly explain your choice below.
 
 <!-------------------------- Start your work below ---------------------------->
 
-Cancer sample, because the data is most completed and contain mostly numeric data, which I can use different statistical tests to analyze <!----------------------------------------------------------------------------->
+**Cancer sample,** because the data is most completed and contain mostly numeric data, which require minimum data precleaning.
+It is also the dataset I am **most interested in** so it is easier for me to come up with research questions for the downstream analysis.
+<!----------------------------------------------------------------------------->
 
 1.4 **(2 points)** Time for a final decision!
 Going back to the beginning, it's important to have an *end goal* in mind.
@@ -175,7 +177,7 @@ Note it down below.
 
 <!-------------------------- Start your work below ---------------------------->
 
-Does the malignant patients have higher radius mean than benign patients?
+For the *cancer sample* data set, does biopsy mean radius predict the diagnosis result?
 <!----------------------------------------------------------------------------->
 
 # Important note
@@ -212,7 +214,7 @@ But part of this project is for you to practice the tools we learned in class, w
 8.  Use a density plot to explore any of your variables (that are suitable for this type of plot).
 
 ```{r}
-#1 (GRADED) This is to visualize the distribution of the mean radius of nuclei to get a sense of the data distribution. 
+#1 (GRADED) I used a histogram to visualize the distribution of the mean radius of nuclei to get a sense of the data distribution. 
 
 ggplot(cancer_sample,aes(radius_mean))+
   geom_histogram(binwidth=3,fill="cornflowerblue")+
@@ -231,7 +233,7 @@ ggplot(cancer_sample,aes(x=diagnosis,y=radius_mean ))+
 ```
 
 ```{r}
-#7(graded). Delete the ID from the table to avoid privacy breach 
+#7(graded). Delete the ID from the table to avoid privacy breach for downstream data analysis. The rest of the data is what I am interested in.  
 cancer_tibble<-cancer_sample%>%
   select(-ID)
 head(cancer_tibble)
@@ -247,16 +249,16 @@ ggplot(cancer_sample,aes(x=radius_mean,color=diagnosis))+
 
 <!-------------------------- Start your work below ---------------------------->
 
-I hypothesize that the larger radius mean of the biopsies will lead to a higher risk of cancer diagnosis.
-I first used histogram to visualize the distribution of the mean radius to get a sense the average of the biopsy radius in the data set.
+I hypothesize that the larger biopsy radius mean will lead to a higher risk of cancer diagnosis.
+I first used a histogram to visualize the distribution of the mean radius to get a sense of the average of the biopsy radius in the data set.
 I observed that most people have a radius at 15 (***exercise1***).
 
-I also utilized the box plot to assess radius mean in the benign and malignant population(***exericse 6***).
+I then utilized the box plot to assess radius mean in the benign and malignant populations(**exercise *6***).
 
-I confirmed that malignant population has a higher mean radius, though there is some range overlapping between benign and malignant.
-A similar trend was also confirmed with the density distribution plot (*exercise8*).
+I confirmed that malignant population has a higher mean radius, though there is some range overlapping between benign and malignant, so a statistical test is required to assess if the difference is significant.
+A similar trend was also confirmed with the density distribution plot (***exercise8***).
 
-lastly,I created a subset table without a diagnosis, so I can perform my downstream analysis without releasing patient information (***exercise7***).
+Lastly,I created a subset table without a diagnosis, so I can perform my downstream analyses without releasing patient information (***exercise7***).
 <!----------------------------------------------------------------------------->
 
 # Task 3: Choose research questions
@@ -268,10 +270,17 @@ Write the 4 questions and any additional comments below.
 
 <!--- *****START HERE***** --->
 
-1.  Does the radius mean of the biopsies correlate with the perimeter mean of the biopsies?
-2.  Does the radius mean of the biopsies correlate with the compactness of the biopsies?
-3.  Does texture of the biopsies predict the diagnosis results?
-4.  Does the concavity provide an additional prediction value ontop of the radius_mean for the breast cancer diagnosis? <!----------------------------->
+I would like to stick with the *cancer_sample* data set I have been using
+
+1.  Does the biopsy mean radius correlate with the perimeter mean of the biopsies?
+
+2.  Does the biopsy mean radius correlate with the compactness of the biopsies?
+
+3.  Does the biopsy mean texture predict the diagnosis results?
+
+4.  Does the biopsy mean compatness predict the diagnosis results?
+
+    \<----------------------------\>
 
 # Overall reproducibility/Cleanliness/Coherence Checklist
 
