@@ -133,10 +133,12 @@ Would you like to write more comments outside of the code chunk?
 ### EXPLORE HERE ###
 #For each dataset, I am using head and summary to get an overall sense of the data, class and dimension to see the data structure and size. I prefer numeric data and data that is most completed. 
 #apt_buildings
+
 head(apt_buildings)
 class(apt_buildings)
 dim(apt_buildings)
 summary(apt_buildings)
+
 #cancer_samples
 head(cancer_sample)
 class(cancer_sample)
@@ -229,7 +231,7 @@ ggplot(cancer_sample,aes(radius_mean))+
 ggplot(cancer_sample,aes(x=diagnosis,y=radius_mean ))+
   geom_boxplot()+
   labs(x="Diagnosis",y="mean_radius_nuclei",title="Boxplot of mean radius nuclei for beneign or malignant")+
-  theme(plot.title = element_text(hjust=0.5))
+  theme(plot.title = element_text(hjust=0.5)) #create axis labels and titles
 ```
 
 ```{r}
@@ -238,10 +240,11 @@ cancer_tibble<-cancer_sample%>%
   select(-ID)
 head(cancer_tibble)
 #8(graded) Create a distribution plot to confirm if higher mean radius is observed in the malignant group than benign group. 
-ggplot(cancer_sample,aes(x=radius_mean,color=diagnosis))+
+ggplot(cancer_sample,aes(x=radius_mean,fill=diagnosis))+
   geom_density(alpha=0.8)+ # to make the color more transparent for visbility 
   labs(x="mean_radius_nuclei",title="Density distribution of mean radius nuclei")+
-  theme(plot.title = element_text(hjust=0.5))
+  theme(plot.title = element_text(hjust=0.5))#Creates axis labels and titles
+
 
 ```
 
@@ -278,7 +281,7 @@ I would like to stick with the *cancer_sample* data set I have been using
 
 3.  Does the biopsy mean texture predict the diagnosis results?
 
-4.  Does the biopsy mean compatness predict the diagnosis results?
+4.  Does the biopsy mean compactness predict the diagnosis results?
 
     \<----------------------------\>
 

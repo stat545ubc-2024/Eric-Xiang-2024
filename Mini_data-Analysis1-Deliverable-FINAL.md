@@ -619,7 +619,7 @@ ggplot(cancer_sample,aes(radius_mean))+
 ggplot(cancer_sample,aes(x=diagnosis,y=radius_mean ))+
   geom_boxplot()+
   labs(x="Diagnosis",y="mean_radius_nuclei",title="Boxplot of mean radius nuclei for beneign or malignant")+
-  theme(plot.title = element_text(hjust=0.5))
+  theme(plot.title = element_text(hjust=0.5)) #create axis labels and titles
 ```
 
 ![](Mini_data-Analysis1-Deliverable-FINAL_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
@@ -650,10 +650,10 @@ head(cancer_tibble)
 
 ``` r
 #8(graded) Create a distribution plot to confirm if higher mean radius is observed in the malignant group than benign group. 
-ggplot(cancer_sample,aes(x=radius_mean,color=diagnosis))+
+ggplot(cancer_sample,aes(x=radius_mean,fill=diagnosis))+
   geom_density(alpha=0.8)+ # to make the color more transparent for visbility 
   labs(x="mean_radius_nuclei",title="Density distribution of mean radius nuclei")+
-  theme(plot.title = element_text(hjust=0.5))
+  theme(plot.title = element_text(hjust=0.5))#Creates axis labels and titles
 ```
 
 ![](Mini_data-Analysis1-Deliverable-FINAL_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
@@ -706,7 +706,7 @@ using
 
 3.  Does the biopsy mean texture predict the diagnosis results?
 
-4.  Does the biopsy mean compatness predict the diagnosis results?
+4.  Does the biopsy mean compactness predict the diagnosis results?
 
     \<—————————-\>
 
