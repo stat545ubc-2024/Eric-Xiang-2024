@@ -829,10 +829,10 @@ I would like to stick with the *cancer_sample* data set I have been
 using
 
 1.  Does the biopsy mean radius correlate with the perimeter mean of the
-    biopsies?
+    biopsy?
 
 2.  Does the biopsy mean radius correlate with the compactness of the
-    biopsies?
+    biopsy?
 
 3.  Does the biopsy mean texture predict the diagnosis results?
 
