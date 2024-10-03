@@ -28,6 +28,7 @@ devtools::install_github("UBC-MDS/datateachr")
 library(datateachr)# dataset import 
 library(tidyverse)#data manipulation 
 library(ggplot2) #visualization
+library(dplyr)#for Data manipulation 
 ```
 
 3.  Make a repository in the <https://github.com/stat545ubc-2024> Organization. You can do this by following the steps found on canvas in the entry called [MDA: Create a repository](https://canvas.ubc.ca/courses/158528/pages/mda-create-a-repository). One completed, your repository should automatically be listed as part of the stat545ubc-2024 Organization.
@@ -115,7 +116,7 @@ Also, include a **brief** description of the dataset here to help the teaching t
 
 <!-------------------------- Start your work below ---------------------------->
 
-1: apt_buildings 2: cancer_sample 3: flow \_sample 4: parking_meters
+1: apt_buildings 2: cancer_sample 3: flow_sample 4: parking_meters
 
 <!----------------------------------------------------------------------------->
 
@@ -129,33 +130,56 @@ Would you like to write more comments outside of the code chunk?
 
 <!-------------------------- Start your work below ---------------------------->
 
+```
+
 ```{r}
 ### EXPLORE HERE ###
-#For each dataset, I am using head and summary to get an overall sense of the data, class and dimension to see the data structure and size. I prefer numeric data and data that is most completed. 
+#For each dataset, I am using glimpse and summary to get an overall sense of the data, class and dimension to see the data structure and size. I prefer numeric data and data that is most completed. 
+#I also used dplyr functions to do a quick exploration of the variables I am interested in  
 #apt_buildings
-
-head(apt_buildings)
+apt_buildings%>%
+  glimpse()
 class(apt_buildings)
 dim(apt_buildings)
 summary(apt_buildings)
+# this is to see if the air_conditioning housing has more mean_elevators relative to no air conditioner
+apt_buildings %>% 
+  group_by(air_conditioning)%>%
+  summarize(mean_elevator=mean(no_of_elevators,na.rm=TRUE),n = n())
 
 #cancer_samples
-head(cancer_sample)
+cancer_sample%>%
+  glimpse()
 class(cancer_sample)
 dim(cancer_sample)
 summary(cancer_sample)
-
+cancer_sample %>% 
+  group_by(diagnosis)%>%
+  summarize(group_compactness=mean(compactness_mean ),n = n())
+#I found the compactness is higher in the malignant patients, I also found based on the benign patients are higher in the dataset. 
 #flow_sample
-head(flow_sample)
+flow_sample%>%
+  glimpse()
 class(flow_sample)
 dim(flow_sample)
 summary(flow_sample)
-#parking_meters
 
-head(parking_meters)
+flow_sample %>% 
+  group_by(year)%>%
+  summarize(mean_flow_year=mean(flow,na.rm=TRUE),n = n())
+#I found the mean flow fluctuate in each year with no clear observable pattern. 
+
+#parking_meters
+parking_meters%>%
+  glimpse()
+
 class(parking_meters)
 dim(parking_meters)
 summary(parking_meters)
+parking_meters%>%
+  group_by(meter_head)%>%
+  summarize(mean_latitude=mean(latitude,na.rm=TRUE),n=n())
+#This shows the latitude of the parking meter is independent of the meter_head type
 
 ```
 
@@ -232,6 +256,7 @@ ggplot(cancer_sample,aes(x=diagnosis,y=radius_mean ))+
   geom_boxplot()+
   labs(x="Diagnosis",y="mean_radius_nuclei",title="Boxplot of mean radius nuclei for beneign or malignant")+
   theme(plot.title = element_text(hjust=0.5)) #create axis labels and titles
+
 ```
 
 ```{r}
@@ -254,11 +279,10 @@ ggplot(cancer_sample,aes(x=radius_mean,fill=diagnosis))+
 
 I hypothesize that the larger biopsy radius mean will lead to a higher risk of cancer diagnosis.
 I first used a histogram to visualize the distribution of the mean radius to get a sense of the average of the biopsy radius in the data set.
-I observed that most people have a radius at 15 (***exercise1***).
+I observed that most people have a radius at 15. But the distribution is left-skewed (***exercise1***).
 
-I then utilized the box plot to assess radius mean in the benign and malignant populations(**exercise *6***).
+I then utilized the box plot to assess radius mean in the benign and malignant populations(**exercise *6***).I confirmed that malignant population has a higher mean radius, though there is some range overlapping between benign and malignant, so a statistical test is required to assess if the difference is significant.
 
-I confirmed that malignant population has a higher mean radius, though there is some range overlapping between benign and malignant, so a statistical test is required to assess if the difference is significant.
 A similar trend was also confirmed with the density distribution plot (***exercise8***).
 
 Lastly,I created a subset table without a diagnosis, so I can perform my downstream analyses without releasing patient information (***exercise7***).
