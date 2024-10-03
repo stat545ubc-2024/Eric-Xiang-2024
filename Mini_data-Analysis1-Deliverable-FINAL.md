@@ -1,7 +1,7 @@
 Mini Data-Analysis Deliverable 1
 ================
 Eric Xiang
-2024-09-30
+2024-10-03
 
 # Welcome to your (maybe) first-ever data analysis project!
 

@@ -1,7 +1,7 @@
 ---
 title: 'Mini Data-Analysis Deliverable 1'
 author: 'Eric Xiang'
-date: '2024-09-30'
+date: '2024-10-03'
 output: github_document
 editor_options: 
   markdown: 
