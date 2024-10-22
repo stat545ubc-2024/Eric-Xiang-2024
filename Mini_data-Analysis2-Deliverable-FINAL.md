@@ -1,7 +1,7 @@
 Mini Data-Analysis Deliverable 2
 ================
 Eric Xiang
-2024-10-03
+2024-10-23
 
 *To complete this milestone, you can either edit [this `.rmd`
 file](https://raw.githubusercontent.com/UBC-STAT/stat545.stat.ubc.ca/master/content/mini-project/mini-project-2.Rmd)
@@ -70,7 +70,8 @@ By the end of this milestone, you should:
 Begin by loading your data and the tidyverse package below:
 
 ``` r
-#install.packages("here") package installation code
+#package installation code, install if needed
+#install.packages("here") 
 ```
 
 ``` r
@@ -180,6 +181,7 @@ correlated with the mean radius of the biopsy. Both variables are higher
 in mean with malignant diagnosis relative to the benign diagnosis.
 
 ``` r
+#summarizing radius_mean 
 cancer_sample%>%
   group_by(diagnosis)%>%
   summarize(mean=mean(radius_mean),,median=median(radius_mean),sd=sd(radius_mean), range=diff(range(radius_mean)))
@@ -192,6 +194,7 @@ cancer_sample%>%
     ## 2 M          17.5   17.3  3.20  17.2
 
 ``` r
+#plotting 
 ggplot(cancer_sample,aes(x=perimeter_mean, fill=diagnosis))+
   geom_density(alpha=0.8)+
   labs(x="mean_perimeter_mean",title="Density distribution of perimeter mean")+
@@ -203,16 +206,16 @@ ggplot(cancer_sample,aes(x=perimeter_mean, fill=diagnosis))+
 **Research Question2:** Does the biopsy mean radius correlate with the
 compactness of the biopsy?
 
-I chose *question 1 from summarizing* part. This is because I want to
-get a rough idea how the mean radius change from benign to malignant by
-computing range mean, median and standard deviation of the variable
+I chose *question 1 from the summarizing* part. This is because I want
+to get a rough idea how the mean radius change from benign to malignant
+by computing range mean, median and standard deviation of the variable
 
 I *chose question 8* from graphing by plotting a dot plot to show the
 relationship between mean compactness and mean radius. I used
-geom_function to visualize the relationship (regression line between the
-two variables). I also plotted the mean radius in malignant and in the
-benign groups to assess if the correlation changes with different
-diagnoses.
+geom_smooth function to visualize the relationship (regression line
+between the two variables). I also plotted the mean radius in malignant
+and in the benign groups to assess if the correlation changes with
+different diagnoses.
 
 **Result observations:**
 
@@ -223,16 +226,17 @@ increases with malignant diagnosis, similar to mean radius’ trend.
 From the dot plot, I see that the relationship between mean compactness
 and mean radius is unrelated (i.e. horizontal trend line) when mean
 radius\<15, but after mean radius \>15, the compactness increases with
-the radius linearly . This change might be because of the diagnosis.
-When plotting the mean radius of the biopsy in the benign group (12.1)
-and in the malignant group (17.4), we can observe mean radius and mean
-compactness of the biopsy are likely more related in the malignant group
-than in the benign group.
+the radius linearly. This change might be because of the diagnosis. When
+plotting the mean radius of the biopsy in the benign group (12.1,blue
+dotted line) and in the malignant group (17.4,red dotted line), we can
+observe mean radius and mean compactness of the biopsy are likely more
+related in the malignant group than in the benign group.
 
-However, statistical test is required to confirm the relationship
+However, a statistical test is required to confirm the relationship
 between the two variables.
 
 ``` r
+#summarizing compactness mean 
 cancer_sample%>%
   group_by(diagnosis)%>%
   summarize(mean=mean(compactness_mean),range=diff(range(compactness_mean)),median=median(compactness_mean),sd=sd(compactness_mean))
@@ -245,6 +249,7 @@ cancer_sample%>%
     ## 2 M         0.145  0.299 0.132  0.0540
 
 ``` r
+#plotting a dot plot showing the correlation between mean radius and mean compactness 
 ggplot(cancer_sample,aes(x=radius_mean,y=compactness_mean ))+
   geom_point()+
   geom_smooth()+
@@ -278,22 +283,23 @@ that the categorization was successful. I also counted the number of
 observation at each level. I then used the ggplot to plot the texture
 mean grouped at different level. I found that texture mean have a
 positive correlation with diagnosis (i.e. increase with malignant
-diagnoses) in the moderate and the high group, possibly due to fact that
-these group have the highest observations, showing the dominant trend.
+diagnoses) in the moderate and the high group while the very high or low
+group did not show the trend, possibly due to fact that these group have
+the highest observations, showing the dominant trend.
 
-I *chose question 8* from graphing part and plotted the mean texture
-with box plot. I found that the texture increases with malignant samples
-compared to the benign biopsies. I also plotted the mean texture mean in
-the malignant and in the benign group. The mean is close to the median,
-suggesting the distribution is normal.
+I *chose question 8* from graphing part and plotted the mean texture in
+malignant and benign group with box plot. I found that the texture
+increases with malignant samples compared to the benign biopsies. I also
+plotted the mean texture mean in the malignant and in the benign group.
+The mean is close to the median, suggesting the distribution is normal.
 
 **Result observation:** Texture mean is correlated with the diagnosis
 result and will increase with malignant diagnosis. The correlation is
 particularly strong when mean texture is between 12-24
 
 ``` r
-#3.  Does the biopsy mean texture predict the diagnosis results?
-#question 3 I created a categorical group texture_level to categorize the biopsy texture 
+#summarizing texture mean+categorize into different levels 
+
 cancer_sample%>%
   group_by(diagnosis)%>%
   summarize(mean=mean(texture_mean),min=min(texture_mean),max=max(texture_mean),median=median(texture_mean),sd=sd(texture_mean),range=diff(range(texture_mean)))
@@ -312,6 +318,7 @@ cancer_modified<-cancer_sample %>%
                                  texture_mean< 24~"high",
                                  TRUE ~ "very high"),
                       levels = c('low', 'moderate', 'high', 'very high')))
+#confirmed texture_level is created and show the counts in each level 
 cancer_modified #printing table
 ```
 
@@ -364,7 +371,7 @@ ggplot(cancer_modified,aes(x=texture_level,y=texture_mean,fill=diagnosis ))+
 ![](Mini_data-Analysis2-Deliverable-FINAL_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 ``` r
-#question 8 graphing with multiple layers 
+#Graphing question 8 graphing with multiple layers (mean of texture is indicated in the graph as a black dot)
   
 ggplot(cancer_sample,aes(x=diagnosis,y=texture_mean,fill=diagnosis ))+
   geom_boxplot(outlier.shape=1,width=0.4)+
@@ -383,14 +390,15 @@ ggplot(cancer_sample,aes(x=diagnosis,y=texture_mean,fill=diagnosis ))+
 #mean is similar to the median-> likely the distribution is normal 
 ```
 
-Does the biopsy mean compactness predict the diagnosis results?
+**Research Question 4:** Does the biopsy mean compactness predict the
+diagnosis results?
 
 I *chose question3* from summarizing. I first analyzed the range,mean,
-median, min, max and standard deviation of the mean compactness in both
+median, min, max, and standard deviation of the mean compactness in both
 malignant and benign group. Based on the summarized data, I then
-determined the cut off for each compactness group. I then created a new
-categorical variable called compactness_level to group the texture_mean
-into four levels. This will allow me to predict if the variable change
+determined the cut off for each group. I then created a new categorical
+variable called compactness_level to group the compactness \_mean into
+four levels. This will allow me to predict if the variable changes
 correlation as the mean compactness changes. I printed the table to
 confirm that the categorization was successful. I also counted the
 number of observation at each level. I then used the ggplot to plot the
@@ -409,6 +417,7 @@ result and will increase with malignant diagnosis. The correlation is
 particularly strong when mean texture is between 12-24
 
 ``` r
+#summarizing and categorizing compactness into different levels
 cancer_sample%>%
   group_by(diagnosis)%>%
   summarize(mean=mean(compactness_mean),min=min(compactness_mean),max=max(texture_mean),median=median(compactness_mean),sd=sd(compactness_mean),range=diff(range(compactness_mean)))
@@ -427,7 +436,7 @@ cancer_modified<-cancer_modified%>%
                                  compactness_mean< 0.14~"high",
                                  TRUE ~ "very high"),
                       levels = c('low', 'moderate', 'high', 'very high')))
-
+#print the modified table to confirm categorization and counts in each level 
 cancer_modified%>%
   group_by(compact_level)%>%
   count()
@@ -443,6 +452,7 @@ cancer_modified%>%
     ## 4 very high       116
 
 ``` r
+#plotting compactness_mean in four levels 
 ggplot(cancer_modified,aes(x=compact_level,y=compactness_mean,fill=diagnosis ))+
   geom_boxplot(outlier.shape=1,width=0.4)+
   geom_jitter(width=0.1,size=0.15,alpha=0.3)+
@@ -455,8 +465,7 @@ ggplot(cancer_modified,aes(x=compact_level,y=compactness_mean,fill=diagnosis ))+
 ![](Mini_data-Analysis2-Deliverable-FINAL_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 ``` r
-#question 8 graphing with multiple layers 
-
+#Graphing question 8 graphing with multiple layers (mean compactness_mean is plotted as black dots. ) 
 
 ggplot(cancer_modified,aes(x=diagnosis,y=compactness_mean,fill=diagnosis ))+
   geom_boxplot(outlier.shape=1,width=0.4)+
@@ -487,7 +496,7 @@ that biopsy radius increase with perimeter mean so they are correlated.
 
 Radius mean maybe correlated with compactness but not clear unless doing
 statistical tests. I would do a model testing to assess the significance
-based on the value.
+based on the p value.
 
 The box plot showed that the biopsy texture and compactness vary from
 benign to malignant diagnosis, suggesting the two variables can predict
@@ -520,8 +529,8 @@ I will choose the cancer_modified data set containing new variables
 
 Based on my proposed research questions, I chose ID, diagnosis,
 radius_mean, texture_mean, perimeter_mean, compactness_mean,
-texture_level and compactness_level for my analysis on whether data set
-is tidy
+texture_level and compactness_level for my analysis on whether the data
+set is tidy
 
 Based on my observation, the selected cancer_sample table is tidy
 
@@ -577,8 +586,8 @@ four research questions (**cancer_modified**, including the
 texture_level variable I categorized myself). To make the table untidy,
 I first selected the 8 variables I am interested in for the downstream
 analysis. I then make the table wider by moving texture_level
-information into new column. This is an untidy dataset because the ID is
-now moving to become the column name with texture level becoming its
+information into new columns. This is an untidy dataset because the ID
+is now moving to become the column name with texture level becoming its
 value. For each ID column, there is only one value, the rest are just
 empty cells.
 
@@ -685,7 +694,7 @@ Explain your decision for choosing the above two research questions.
 
 <!--------------------------- Start your work below --------------------------->
 
-**To address my first question,** previously, I plotted box plots to
+**To address my first question,** previously, I plotted a box plot to
 show that the mean compactness increases from benign to malignant
 diagnoses. I want to perform statistical tests to confirm if the biopsy
 compactness mean is statistically different between the malignant and
@@ -789,7 +798,7 @@ these.
 **Research Question**: Does the biopsy mean radius correlate with the
 compactness of the biopsy?
 
-**Variable of interest**: Compactness_mean
+**Variable of interest**: radius_mean
 
 <!----------------------------------------------------------------------------->
 
@@ -825,6 +834,7 @@ slope is 33.77, so the correlation is positive . The correlation is also
 significant with p value equal to 2.41e-38, which is way less than 0.05.
 
 ``` r
+#linear model analysis 
 corr_radius<-lm(radius_mean~compactness_mean,data=cancer_sample) 
 corr_radius
 ```
@@ -838,7 +848,9 @@ corr_radius
     ##            10.60             33.77
 
 ``` r
-tidy(corr_radius)#x=0 ,y intercept is at 10.60, slope is 33.77, so the correlation is positive
+#put the analysis in a table 
+
+tidy(corr_radius)
 ```
 
     ## # A tibble: 2 × 5
@@ -846,10 +858,6 @@ tidy(corr_radius)#x=0 ,y intercept is at 10.60, slope is 33.77, so the correlati
     ##   <chr>               <dbl>     <dbl>     <dbl>     <dbl>
     ## 1 (Intercept)          10.6     0.283      37.5 8.91e-156
     ## 2 compactness_mean     33.8     2.42       14.0 2.41e- 38
-
-``` r
- #The correlation is significant with p value equal to 2.41e-38 less than 0.05.
-```
 
 <!----------------------------------------------------------------------------->
 
@@ -870,13 +878,14 @@ Y, or a single value like a regression coefficient or a p-value.
 <!-------------------------- Start your work below ---------------------------->
 
 Using the linear correlation model, I predicted the mean_radius when
-compactness is 0.1,0.2 and 0.3.
+compactness_mean is 0.1,0.2 and 0.3.
 
 I used the broom package augment function to product a table output
 containing mean compactness as the x variable and radius a the y
 variable.
 
 ``` r
+#predict radius_mean using mean compactness with broom::augument function
 augment(corr_radius,newdata=tibble(compactness_mean=seq(0.1,0.3,0.1)))
 ```
 
