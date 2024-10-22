@@ -491,17 +491,29 @@ research questions are yielding interesting results?
 
 <!------------------------- Write your answer here ---------------------------->
 
-Based on the qualitative exploration of the data points, it is clear
-that biopsy radius increase with perimeter mean so they are correlated.
+Based on the qualitative exploration of the data points, it is likely
+that biopsy radius increase with perimeter mean so they are
+correlated.This is because the the summary and density distribution plot
+both show increase in values from benign diagnoses to malignant
+diagnoses.
 
-Radius mean maybe correlated with compactness but not clear unless doing
-statistical tests. I would do a model testing to assess the significance
-based on the p value.
+Radius mean maybe correlated with compactness but not clear as the
+relationship was close to horizontal when radius\<15 but had a positive
+linear relationship when radius\>15. It is quite interesting that the
+relationship changed as the radius of mean changed, but likely due to
+diagnosis results.
+
+However,To confirm the correlation between biopsy radius and perimeter
+mean or between compactness and radius mean , I would do a linear model
+testing to assess the correlation significance based on the p value.
 
 The box plot showed that the biopsy texture and compactness vary from
 benign to malignant diagnosis, suggesting the two variables can predict
-cancer diagnosis. A statistical test like a T test would help
-quantitatively confirm the plot observations.
+cancer diagnosis.
+
+A statistical test like a T test would help quantitatively confirm the
+plot observations to see if they are statistically significant predictor
+for the cancer diagnoses results.
 
 <!----------------------------------------------------------------------------->
 
@@ -539,7 +551,7 @@ indicating a unique observation. Each column is a unique variable of
 measurement, from the variable mean and level For each cell, the value
 is also unique.
 
-The format of the table also makes it easy for me to answer my
+The format of the table also makes it easy for me to answer my research
 questions. I just to need to select the columns based on the variables I
 am interested in (e.g. diagnosis, radius_mean, texture_mean and
 compactness_mean) and drop other irrelevant columns when addressing my
@@ -754,9 +766,9 @@ changed_cancer1
 
 To answer my second question, I will select compactness_mean,radius_mean
 from the cancer_modified table. I will drop any NA data in the data set.
-The variable name “compactness_mean” and “radius_mean” are qiute long,
+The variable name “compactness_mean” and “radius_mean” are quite long,
 For convenience, I will shorten them to “compactnessM” and “radiusM”
-respectively. I also calculated the mean of compactness (mean_compact\_
+respectively. I also calculated the mean of compactness (mean_compact
 and radius (mean_radius) for comparison between each observation and the
 mean.
 
@@ -829,9 +841,11 @@ radius is correlated with the mean compactness.To test the hypothesis, I
 will fit compactness_mean and radius_mean in a linear model and see if
 the correlation is significant
 
-From the output table, we see that when x=0 ,y intercept is at 10.60,
-slope is 33.77, so the correlation is positive . The correlation is also
-significant with p value equal to 2.41e-38, which is way less than 0.05.
+In this case, I defined y=radius_meand and the predictor variable as the
+compactness_mean. From the output table, we see that when x=0 ,y
+intercept is at 10.60, slope is 33.77, so the correlation is positive .
+The correlation is also significant with p value equal to 2.41e-38,
+which is way less than 0.05.
 
 ``` r
 #linear model analysis 
