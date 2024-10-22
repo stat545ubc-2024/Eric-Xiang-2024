@@ -18,12 +18,8 @@ This Minidata Analysis is part of the [STAT 545A](https://stat545.stat.ubc.ca/sy
 
 1.  README.md: This file provides an overview of the analysis
 
-2.  Mini_data_Analysis1_Deliverable-FINAL.Rmd: Data Analysis R code.
+4.  Mini_data_Analysis_Deliverable_Final-files: This folder contains the source for MDA1, including the RMD files and knitted output
 
-3.  Mini_data_Analysis1_Deliverable_Final_md: Knitted file of the mini data analysis1
-
-4.  Mini_data_Analysis_Deliverable_Final-files: This folder contains the source for MDA1
-
-5.  Mini_Data_Analysis2_Deliverable_Final_files: This folder contains the source for MDA2
+5.  Mini_Data_Analysis2_Deliverable_Final_files: This folder contains the source for MDA2, including the RMD files and knitted output 
 
 6.  output: This folder contains the CSV and RSD files generated from MDA2 task4
